@@ -1,0 +1,71 @@
+
+int Doorbell = 3;
+int green = 4;
+int blue = 5;
+int red = 6;
+int white = 7;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(Doorbell, INPUT_PULLUP);
+  pinMode(green, OUTPUT);
+  pinMode(blue, OUTPUT);
+  pinMode(red, OUTPUT);
+  pinMode(white, OUTPUT);
+  digitalWrite(white, HIGH);
+}
+void loop() {
+LM35();
+int reading = analogRead(A1);
+if (reading <= 120) {
+Warning();
+}
+Rotation();
+int Degree = analogRead(A0);
+if (Degree <= 120) {
+Speen();
+}
+if (digitalRead(Doorbell) == LOW) {
+DoorBell();
+}}
+
+void LM35() {
+  int reading = analogRead(A1);
+  Serial.print(reading);
+  Serial.println("˚");
+  delay(500);
+}
+void Warning() {
+  int reading = analogRead(A1);
+  if (reading <= 120) {
+  digitalWrite(red, HIGH);
+  delay(100);
+  digitalWrite(red, LOW);
+  delay(100);
+}}
+void Rotation() {
+    int Degree = analogRead(A0);
+    Serial.print("Degree :");
+    Serial.println((int)(Degree));
+    delay(500);
+}
+void Speen() {
+    digitalWrite(blue, HIGH);
+    delay(300);
+    digitalWrite(blue, LOW);
+    delay(300);
+    }
+void DoorBell() {
+    digitalWrite(green, HIGH);
+    delay(700);
+    digitalWrite(green, LOW);
+    delay(700);
+    digitalWrite(green, HIGH);
+    delay(700);
+    digitalWrite(green, LOW);
+    delay(700);
+    digitalWrite(green, HIGH);
+    delay(700);
+    digitalWrite(green, LOW);
+    delay(700);
+}
